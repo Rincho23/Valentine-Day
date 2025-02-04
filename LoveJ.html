@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сюрприз</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
             text-align: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Dancing Script', cursive;
             background-color: #ffccdd;
             display: flex;
             flex-direction: column;
@@ -18,22 +19,7 @@
             position: relative;
         }
 
-        /* Фоновые сердечки */
-        @keyframes hearts {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
-
-        .heart {
-            position: absolute;
-            bottom: -10px;
-            font-size: 24px;
-            color: #ff4d6d;
-            opacity: 0;
-            animation: hearts 5s infinite linear;
-        }
-
-        /* Плавное появление текста */
+        /* Плавное появление */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -43,7 +29,7 @@
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Кролик прыгает */
+        /* Кролик */
         .bunny {
             font-size: 50px;
             animation: hop 1s infinite alternate;
@@ -54,16 +40,17 @@
             to { transform: translateY(-10px); }
         }
 
-        /* Стиль кнопок */
+        /* Кнопки */
         button {
-            font-size: 18px;
-            padding: 12px 25px;
+            font-size: 20px;
+            padding: 12px 30px;
             margin: 10px;
             border: none;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 15px;
             transition: 0.3s;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Dancing Script', cursive;
         }
 
         .open-btn {
@@ -87,12 +74,12 @@
         /* Скрытые элементы */
         .hidden-content {
             display: none;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* Исчезновение элементов */
+        /* Исчезновение */
         .fade-out {
             animation: fadeOut 0.5s forwards;
         }
@@ -104,24 +91,6 @@
     </style>
 </head>
 <body>
-
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Сердечки -->
-    <script>
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
-        setInterval(createHeart, 500);
-    </script>
 
     <!-- Первый экран -->
     <div id="intro" class="fade">
@@ -149,6 +118,13 @@
             <button class="open-btn" onclick="showMessage()">Дааа</button>
             <button class="no-btn" onclick="alert('Ну как хочешь... 😢')">Нет</button>
         </div>
+    </div>
+
+    <!-- Воспоминание перед 14 февраля -->
+    <div class="hidden-content fade" id="memory">
+        <h2>Помнишь 3 ноября? 🥰</h2>
+        <p>Именно тогда началась наша история... <br> Время летит, но я каждый день благодарен за тебя. ❤️</p>
+        <button class="open-btn" onclick="showFinal()">Дальше</button>
     </div>
 
     <!-- Финальное поздравление -->
@@ -179,13 +155,16 @@
             document.getElementById("step2").classList.add("fade-out");
             setTimeout(() => {
                 document.getElementById("step2").style.display = "none";
-                document.getElementById("surprise").style.display = "block";
-                playMusic();
+                document.getElementById("memory").style.display = "block";
             }, 500);
         }
 
-        function playMusic() {
-            document.getElementById("bg-music").play();
+        function showFinal() {
+            document.getElementById("memory").classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("memory").style.display = "none";
+                document.getElementById("surprise").style.display = "block";
+            }, 500);
         }
     </script>
 </body>
