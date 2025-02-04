@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сюрприз</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffccdd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .bunny {
+            font-size: 50px;
+            animation: hop 1s infinite alternate;
+        }
+        @keyframes hop {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .open-btn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .open-btn:hover {
+            background-color: #ff1a47;
+        }
+        .close-btn, .no-btn {
+            background-color: #aaa;
+            color: white;
+        }
+        .close-btn:hover, .no-btn:hover {
+            background-color: #888;
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="intro">
+        <div class="bunny">🐰</div>
+        <div class="message">Привет! Это было не легко сделать, но я попытался.<br>Поэтому выбирай! ↑</div>
+        <div class="buttons">
+            <button class="open-btn" onclick="stepOne()">Открыть</button>
+            <button class="close-btn" onclick="alert('Ну ладно... 😢')">Не открывать</button>
+        </div>
+    </div>
+
+    <div class="hidden-content" id="step1">
+        <p>Ты уверен, что хочешь открыть? 🤔</p>
+        <div class="buttons">
+            <button class="open-btn" onclick="stepTwo()">Да</button>
+            <button class="no-btn" onclick="alert('Ну ладно... Может в следующий раз! 😢')">Нет</button>
+        </div>
+    </div>
+
+    <div class="hidden-content" id="step2">
+        <p>Точно точно? 😏</p>
+        <div class="buttons">
+            <button class="open-btn" onclick="showMessage()">Дааа</button>
+            <button class="no-btn" onclick="alert('Ну как хочешь... 😢')">Нет</button>
+        </div>
+    </div>
+
+    <div class="hidden-content" id="surprise">
+        <h1>С 14 февраля, любимая! ❤️</h1>
+        <p>Ты – самый прекрасный человек в моей жизни!</p>
+        <div style="font-size: 50px;">💖</div>
+    </div>
+
+    <script>
+        function stepOne() {
+            document.getElementById("intro").classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("intro").style.display = "none";
+                document.getElementById("step1").style.display = "block";
+            }, 500);
+        }
+
+        function stepTwo() {
+            document.getElementById("step1").classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("step1").style.display = "none";
+                document.getElementById("step2").style.display = "block";
+            }, 500);
+        }
+
+        function showMessage() {
+            document.getElementById("step2").classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("step2").style.display = "none";
+                document.getElementById("surprise").style.display = "block";
+            }, 500);
+        }
+    </script>
+</body>
+  </html>
